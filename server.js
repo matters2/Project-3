@@ -22,7 +22,34 @@ app.get("/", (req,res) => {
     res.send("hello world")
 })
 
-
+app.post("/api/users/new", (req, res) => {
+    db.query(
+        "INSERT INTO users (username, email, password_digest) VALUES ($1, $2, $3);",
+        ["ben","ben@email.com","hahaha"],
+        (err, dbRes) => {
+            res.json({
+                username: "ben",
+                email: "ben@email.com",
+                password_digest: "hahaha"
+            })
+        }
+    )
+})
+app.post("/api/pets/new", (req, res) => {
+    db.query(
+        "INSERT INTO pets (user_id, species, dob, name, image_url) VALUES ($1, $2, $3, $4, $5);",
+        [1, "dog","2000-12-31","doggy", "dog.jpg"],
+        (err, dbRes) => {
+            res.json({
+                user_id: 1,
+                species: "dog",
+                dob: "2000-12-31",
+                name: "doggy",
+                image_url: "dog.jpg"
+            })
+        }
+    )
+})
 
 
 

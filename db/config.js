@@ -1,7 +1,7 @@
 const pg = require('pg');
 
 const pool = new pg.Pool({
-    database: 'codevid_hotspots',
+    database: 'mypet',
     password: 'ubuntu'
 })
 
