@@ -35,6 +35,7 @@ app.post("/api/users/new", (req, res) => {
         }
     )
 })
+
 app.post("/api/pets/new", (req, res) => {
     db.query(
         "INSERT INTO pets (user_id, species, dob, name, image_url) VALUES ($1, $2, $3, $4, $5);",
@@ -51,8 +52,21 @@ app.post("/api/pets/new", (req, res) => {
     )
 })
 
-
-
+app.post("/api/appointments/new", (req, res) => {
+    db.query(
+        "INSERT INTO appointments (pet_id, appt_type, location, appt_date, comments) VALUES ($1, $2, $3, $4, $5);",
+        [1, "vet","melbourne","2020-05-20", "checkup, dog is sick"],
+        (err, dbRes) => {
+            res.json({
+                pet_id: 1,
+                appt_type: "vet",
+                location: "melbourne",
+                appt_date: "2020-05-20",
+                comments: "checkup, dog is sick"
+            })
+        }
+    )
+})
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`)
