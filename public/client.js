@@ -42,3 +42,42 @@ btnNewPet.addEventListener('click', e => {
     })
 
 })
+
+const btnNewAppt = document.querySelector('.btnNewAppt')
+
+btnNewAppt.addEventListener('click', e => {
+    e.preventDefault()
+
+    var params = {
+        petId: document.querySelector('.petId').value,
+        appType: document.querySelector('.appType').value,
+        location: document.querySelector('.location').value,
+        apptDate: document.querySelector('.apptDate').value,
+        comments: document.querySelector('.comments').value
+    }
+
+    const url = 'http://localhost:8080/api/appointments/new'
+    
+    axios.post(url, params).then(res => {
+        console.log('bug')
+    })
+
+})
+
+const btnNewMeds = document.querySelector('.btnNewMeds')
+
+btnNewMeds.addEventListener('click', e => {
+    e.preventDefault()
+
+    var params = {
+        petId: document.querySelector('.petId').value,
+        comments: document.querySelector('.comments').value
+    }
+
+    const url = 'http://localhost:8080/api/meds/new'
+    
+    axios.post(url, params).then(res => {
+        console.log('bug')
+    })
+
+})
