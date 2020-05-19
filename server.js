@@ -68,6 +68,24 @@ app.post("/api/appointments/new", (req, res) => {
     )
 })
 
+
+app.post("/api/meds/new", (req, res) => {
+    db.query(
+        "INSERT INTO meds (pet_id, comments) VALUES ($1, $2);",
+        [1,"Worming tablets"],
+        (err, dbRes) => {
+            res.json({
+                pet_id: 1,
+                comments: "Worming Tablets"
+            })
+        }
+    )
+})
+
+
+
+
+
 app.listen(port, () => {
     console.log(`listening on port ${port}`)
 })
