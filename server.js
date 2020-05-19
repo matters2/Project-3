@@ -39,14 +39,21 @@ app.post("/api/users/new", (req, res) => {
 app.post("/api/pets/new", (req, res) => {
     db.query(
         "INSERT INTO pets (user_id, species, dob, name, image_url) VALUES ($1, $2, $3, $4, $5);",
-        [1, "dog","2000-12-31","doggy", "dog.jpg"],
+        [
+        req.body.userId,
+        req.body.species,
+        req.body.dob,
+        req.body.name,
+        req.body.image_url
+        ],
+
         (err, dbRes) => {
             res.json({
                 user_id: 1,
-                species: "dog",
-                dob: "2000-12-31",
-                name: "doggy",
-                image_url: "dog.jpg"
+                species: req.body.species,
+                dob: req.body.dob,
+                name: req.body.name,
+                image_url: req.body.image_url
             })
         }
     )
