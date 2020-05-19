@@ -13,7 +13,7 @@ app.use(morgan("combined"))
 
 app.use(bodyParser.json()) // reads params from body
 
-// app.use(express.static("public"))
+app.use(express.static('public'))
 
 ////////// MIDDLEWARE ///////////
 
@@ -25,12 +25,12 @@ app.get("/", (req,res) => {
 app.post("/api/users/new", (req, res) => {
     db.query(
         "INSERT INTO users (username, email, password_digest) VALUES ($1, $2, $3);",
-        ["ben","ben@email.com","hahaha"],
+        [req.body.username, req.body.email, req.body.password],
         (err, dbRes) => {
             res.json({
-                username: "ben",
-                email: "ben@email.com",
-                password_digest: "hahaha"
+                username: req.body.username,
+                email: req.body.email,
+                password_digest: req.body.password
             })
         }
     )
