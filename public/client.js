@@ -70,8 +70,8 @@ btnNewMeds.addEventListener('click', e => {
     e.preventDefault()
 
     var params = {
-        petId: document.querySelector('.petId').value,
-        comments: document.querySelector('.comments').value
+        petId: document.querySelector('.petIdMeds').value,
+        comments: document.querySelector('.commentsMeds').value
     }
 
     const url = 'http://localhost:8080/api/meds/new'
