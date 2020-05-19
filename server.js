@@ -4,7 +4,7 @@ const express = require("express")
 const app = express()
 const port = 8080
 const db = require("./db/config")
-const pwd = require("./db/password")
+const pwd = require("./models/password")
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
