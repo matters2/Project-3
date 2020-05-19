@@ -4,6 +4,7 @@ const express = require("express")
 const app = express()
 const port = 8080
 const db = require("./db/config")
+const pwd = require("./db/password")
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
@@ -23,14 +24,15 @@ app.get("/", (req,res) => {
 })
 
 app.post("/api/users/new", (req, res) => {
+    passwordDigest = pwd.digest(req.body.password)
     db.query(
         "INSERT INTO users (username, email, password_digest) VALUES ($1, $2, $3);",
-        [req.body.username, req.body.email, req.body.password],
+        [req.body.username, req.body.email, passwordDigest],
         (err, dbRes) => {
             res.json({
                 username: req.body.username,
                 email: req.body.email,
-                password_digest: req.body.password
+                password_digest: passwordDigest
             })
         }
     )
