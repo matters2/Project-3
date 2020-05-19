@@ -62,28 +62,36 @@ app.post("/api/pets/new", (req, res) => {
 app.post("/api/appointments/new", (req, res) => {
     db.query(
         "INSERT INTO appointments (pet_id, appt_type, location, appt_date, comments) VALUES ($1, $2, $3, $4, $5);",
-        [1, "vet","melbourne","2020-05-20", "checkup, dog is sick"],
+        [
+            req.body.petId,
+            req.body.appType,
+            req.body.location,
+            req.body.apptDate,
+            req.body.comments
+        ],
         (err, dbRes) => {
             res.json({
-                pet_id: 1,
-                appt_type: "vet",
-                location: "melbourne",
-                appt_date: "2020-05-20",
-                comments: "checkup, dog is sick"
+                pet_id: req.body.petId,
+                appt_type: req.body.appType,
+                location: req.body.location,
+                appt_date: req.body.apptDate,
+                comments: req.body.comments
             })
         }
     )
 })
 
-
 app.post("/api/meds/new", (req, res) => {
     db.query(
         "INSERT INTO meds (pet_id, comments) VALUES ($1, $2);",
-        [1,"Worming tablets"],
+        [
+            req.body.petId,
+            req.body.comments
+        ],
         (err, dbRes) => {
             res.json({
-                pet_id: 1,
-                comments: "Worming Tablets"
+                pet_id: req.body.petId,
+                comments: req.body.comments
             })
         }
     )
