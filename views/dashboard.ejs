@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+
+</head>
+<body>
+
+
+<div class="container">
+
+    <div class="logout">
+        <button>Logout</button>
+    </div>
+
+    <div class="calendar">
+    <h2>Calendar</h2>
+
+     <ul>
+        <li>Appointment 1</li>
+        <li>Appointment 2</li>
+    </ul>
+
+        <div class="medications">
+            <h2>Medications</h2>
+            <ul>
+                <li>Medication 1</li>
+                <li>Medication 2</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="petsList">
+        <h2>Loop all Pets</h2>
+        <img src="#" alt="">
+        
+ 
+
+        <% pets.forEach( pet => { %>
+         <img src="<%= pet.image_url %>" alt="<%= pet.name %>">
+         
+         <% }) %> 
+
+    
+
+        <img src="#" alt="">
+        <button class="addPet">Add a Pet</button>
+    </div>
+
+    
+
+        <div class="newPet">
+          <h2>New Pet</h2>
+        <form action ="">
+            <label for="">UserID</label>
+            <input type="text" class="userId">
+            <label for="">Species</label>
+            <input type="text" class="species">
+            <label for="">DOB</label>
+            <input type="date" class="dob">
+            <label for="">name</label>
+            <input type="text" class="name">
+            <label for="">image_url</label>
+            <input type="text" class="image_url">
+            <button class="btnNewPet">add New Pet</button>
+        </form>
+    </div>
+
+    <div class="newAppointmet">
+        <h2>New Appointment</h2>
+        <form action ="">
+            <label for="">PetID</label>
+            <input type="text" class="petId">
+
+            <label for="">ApptType</label>
+            <input type="text" class="appType">
+
+            <label for="">location</label>
+            <input type="text" class="location">
+
+            <label for="">apptDate</label>
+            <input type="date" class="apptDate">
+
+            <label for="">comments</label>
+            <input type="text" class="comments">
+
+            <button class="btnNewAppt">add New Appt</button>
+        </form>
+    </div>
+
+
+    <div class="listAllAppointments">  
+        <h2>All Appointments</h2>  
+            Date:
+            Appointment Type:
+            Appointment Date: 
+    </div>
+
+
+</div>
+
+    
+<script>
+    
+</script>
+
+
+</body>
+</html>
