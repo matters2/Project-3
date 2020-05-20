@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+
     <title>Dashboard</title>
 
 
@@ -37,14 +39,16 @@
         <h2>Loop all Pets</h2>
         <img src="#" alt="">
         
- 
+        <div class="petMugShots">
 
         <% pets.forEach( pet => { %>
          <img src="<%= pet.image_url %>" alt="<%= pet.name %>">
+         <a class="<%= pet.id %>" href="<%= pet.id %>" data-id="<%= pet.id %>">edit</a>
+        
          
          <% }) %> 
 
-    
+        </div>
 
         <img src="#" alt="">
         <button class="addPet">Add a Pet</button>
@@ -68,6 +72,25 @@
             <button class="btnNewPet">add New Pet</button>
         </form>
     </div>
+
+      <div class="editPet">
+          <h2>Edit Pet</h2>
+        <form action ="">
+            <!-- <label for="">UserID</label> -->
+            <!--  <input type="text" class="userId" type=""> -->
+            <label for="">Species</label>
+            <input type="text" class="pet-edit-species">
+            <label for="">DOB</label>
+            <input type="date" class="pet-edit-dob">
+            <label for="">name</label>
+            <input type="text" class="pet-edit-name">
+            <label for="">image_url</label>
+            <input type="text" class="pet-edit-image_url">
+            <button class="btnNewPet">edit Pet</button>
+        </form>
+    </div>
+
+
 
     <div class="newAppointmet">
         <h2>New Appointment</h2>
@@ -94,9 +117,11 @@
 
     <div class="listAllAppointments">  
         <h2>All Appointments</h2>  
-            Date:
-            Appointment Type:
-            Appointment Date: 
+            
+            <% pets.forEach( pet => { %>
+         <img src="<%= pet.image_url %>" alt="<%= pet.name %>">
+         
+         <% }) %> 
     </div>
 
 
@@ -104,6 +129,31 @@
 
     
 <script>
+
+let editPet = document.querySelector('.petMugShots')
+let editFormSpecies = document.querySelector('.pet-edit-species')
+let editFormDob = document.querySelector('.pet-edit-dob')
+let editFormName = document.querySelector('.pet-edit-name')
+let editFormImageUrl = document.querySelector('.pet-edit-image_url')
+
+editPet.addEventListener('click', (e) => {
+    e.preventDefault()    
+    // console.log(Number(e.target.dataset.id))
+    let petId = (Number(e.target.dataset.id))
+    console.log(petId)
+    let url = `http://localhost:8080/api/pets/${petId}`
+    console.log(url)
+    axios.get(url).then( resp => {
+        console.log(resp.data)
+        editFormSpecies.value = resp.data[0].species
+        editFormDob.value = resp.data[0].dob.slice(0,10)
+        editFormName.value = resp.data[0].name
+        editFormImageUrl.value = resp.data[0].image_url
+    })
+
+
+    
+ })
     
 </script>
 
