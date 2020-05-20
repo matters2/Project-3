@@ -4,13 +4,14 @@ const db = require("../db/config")
 
 router.post("/api/appointments/new", (req, res) => {
     db.query(
-        "INSERT INTO appointments (pet_id, appt_type, location, appt_date, comments) VALUES ($1, $2, $3, $4, $5);",
+        "INSERT INTO appointments (pet_id, appt_type, location, appt_date, comments, user_id) VALUES ($1, $2, $3, $4, $5, $6);",
         [
             req.body.petId,
             req.body.appType,
             req.body.location,
             req.body.apptDate,
-            req.body.comments
+            req.body.comments,
+            req.body.user_id
         ],
         (err, dbRes) => {
             res.json({

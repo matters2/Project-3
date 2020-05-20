@@ -22,7 +22,8 @@ create table appointments (
   appt_type text,
   location text,
   appt_date date,
-  comments text
+  comments text,
+  user_id integer
 );
 
 create table meds (
