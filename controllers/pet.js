@@ -26,22 +26,53 @@ router.post("/api/pets/new", (req, res) => {
     )
 }) // creates new pet
 
-router.get("/api/pets/:username", (req, res) => {
+
+router.put("/api/pets/edit/:pet_id", (req, res) => {
     db.query(
-        "SELECT * FROM pets WHERE username = $1;",
-        [req.params.username],
+        "UPDATE pets SET species = $1, dob = $2, name = $3, image_url = $4 WHERE id = $5;",
+        [
+        
+        req.body.species,
+        req.body.dob,
+        req.body.name,
+        req.body.image_url, 
+        req.body.id, 
+        ],
+
         (err, dbRes) => {
-            res.json(dbRes.rows)
+            res.json({
+                user_id: 1,
+                species: req.body.species,
+                dob: req.body.dob,
+                name: req.body.name,
+                image_url: req.body.image_url
+            })
         }
     )
-}) // select all pets by username
+}) // creates new pet
 
-router.get("/api/pets/:username/:pet_id", (req, res) => {
+
+
+
+
+
+// router.get("/api/pets/:username", (req, res) => {
+//     db.query(
+//         "SELECT * FROM pets WHERE username = $1;",
+//         [req.params.username],
+//         (err, dbRes) => { 
+//             res.json(dbRes.rows)
+//         }
+//     )
+// }) // select all pets by username
+
+router.get("/api/pets/:pet_id", (req, res) => {
     db.query(
-        "SELECT * FROM pets WHERE username = $1 & id = $2;",
-        [req.params.username, req,params.pet_id],
+        "SELECT * FROM pets WHERE id = $1;",
+        [req.params.pet_id],
         (err, dbRes) => {
             res.json(dbRes.rows)
+        
         }
     )
 }) // select pet X by <username>
