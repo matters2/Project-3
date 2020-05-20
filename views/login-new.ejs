@@ -4,15 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <form action="/login/new" method="post">
+  <main class="main">
+    <header>
+      <img src="https://pluspng.com/img-png/cat-and-dog-png-no-background-cat-and-dog-png-image-472.png" class="hero-image">
+      <h1 class="hero-title">Login to see your pet's details</h1>
+    </header>
 
-    <input type="text" name="username">
-    <input type="email" name="email">
-    <input type="text" name="password">
-    <button>Create user</button>
-  
-  </form>
+    <div class="sublayout-centered">
+
+      <form action="/login/new" method="post" class="login-form">
+        <input required class="login-input" type="text" placeholder="Username" name="username">
+        <input required class="login-input" type="email" placeholder="Email" name="email">
+        <input required class="login-input" type="password" placeholder="Password" name="password">
+
+        <button class="login-btn">Sign up and start logging your pet's information!</button>
+      </form>
+      <a href="/login">Already have an account? Click here!</a>
+    </div>
+
+  </main>
+  <script src="/login.js"></script>
 </body>
 </html>
