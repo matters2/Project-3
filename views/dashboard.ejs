@@ -4,130 +4,148 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-
+    <link rel="stylesheet" href="/style.css">
     <title>Dashboard</title>
 
 
 </head>
+
 <body>
 
+<main class="main">
 
-<div class="container">
+    <header class="status-header">
+        <h2 class="status-element">Logged in as <%= user.username %> //</h2>
+        <button class="status-element">Logout?</button>
+        <img class="status-element" height="50px"src="https://i.pinimg.com/originals/37/a8/d8/37a8d8ddeb69604f4a042ddfa345a577.png">
+    </header>
 
-    <div class="logout">
-        <h1><%= user.username %></h1>
-        <button>Logout</button>
-    </div>
+    <div class="layout_3_7"> <!-- Overall container -->
 
-    <div class="calendar">
-    <h2>Calendar</h2>
+        <aside class="sublayout"> <!-- Left sidebar-->
+            <h2>Calendar</h2>
 
-     <ul>
-        <li>Appointment 1</li>
-        <li>Appointment 2</li>
-    </ul>
+            <ul>
+                <li>Appointment 1</li>
+                <li>Appointment 2</li>
+            </ul>
 
-        <div class="medications">
-            <h2>Medications</h2>
-            <ul class="medsList"></ul>
-        </div>
-    </div>
+                <div class="medications">
+                    <h2>Medications</h2>
+                    <ul class="medsList"></ul>
+                </div>
+        </aside> <!-- Left sidebar-->
 
-    <div class="petsList">
-        <h2>Loop all Pets</h2>
-        <img src="#" alt="">
+        <div class="sublayout"> <!-- Main panel-->
+            
+            <div class="petsList">
+                <h2>Check out your pets</h2>
+                
+                <div class="petMugShots sublayout-horizontal">
+
+                    <% pets.forEach( pet => { %>
+                    <div class="sublayout-centered card">
+                        <img class="petImg card-portrait" src="https://i.pinimg.com/originals/37/a8/d8/37a8d8ddeb69604f4a042ddfa345a577.png<%=// pet.image_url %>" alt="<%= pet.name %>" data-id="<%= pet.id %>"> 
+                        <h3 class="petNameLabel card-label"><%= pet.name %></h3>
+                        <button class="btnShowEdit card-button" data-id="<%= pet.id %>">Details</button> 
+                        <button class="btnShowNewAppt card-button" data-id="<%= pet.id %>">Appointments</button> 
+                    </div>
+                    <% }) %> 
+                
+                <div><button class="btnAddNewPet add-button">+</button>&ensp; Add a pet?</div>
+                </div>
+
+            </div>
+
+            
+
+            <div class="newPet">
+
+                <form class="newPetForm" action ="">
+                    
+                    <h2>New Pet</h2>
+                    <input type="hidden" class="pet-new-userId pet-input">
+                    
+                    <label class="pet-subtext">Species</label>
+                    <input type="text" class="pet-new-species pet-input">
+
+                    <label class="pet-subtext">Date of birth</label>
+                    <input type="date" class="pet-new-dob pet-input">
+
+                    <label class="pet-subtext">Name</label>
+                    <input type="text" class="pet-new-name pet-input">
+
+                    <label class="pet-subtext">Link to picture</label>
+                    <input type="text" class="pet-new-image_url pet-input">
+
+                    <button class="btnNewPet pet-button">Add it to your list</button>
+                </form>
+            </div>
+
+
+
+            <div class="editPet">
+                <form class="editPetForm" action ="">
+                <h2>Edit Pet</h2>
+                    
+                    <input class="userId" type="hidden" value="">
+                    <input class="petId" type="hidden" value="">
+
+                    <label class="pet-subtext">Species</label>
+                    <input type="text" class="pet-edit-species pet-input">
+
+                    <label class="pet-subtext">Date of birth</label>
+                    <input type="date" class="pet-edit-dob pet-input">
+
+                    <label class="pet-subtext">Name</label>
+                    <input type="text" class="pet-edit-name pet-input">
+
+                    <label class="pet-subtext">Link to picture</label>
+                    <input type="text" class="pet-edit-image_url pet-input">
+
+                    <button class="btnEditPet pet-button">Update details</button>
+                </form>
+            </div>
+
+
+
+            <div class="newAppointmet">
+                <form action ="" class="newApptForm">
+                <h2>New Appointment</h2>
+                
+                    <input type="hidden" class="petID">
+                    <input type="hidden" class="apptUserId" value="<%= user.id %>">
+
+                    <label class="pet-subtext">Appointment type</label>
+                    <input type="text" class="appType pet-input">
+
+                    <label class="pet-subtext">Date</label>
+                    <input type="date" class="apptDate pet-input">
+
+                    <label class="pet-subtext">Location</label>
+                    <input type="text" class="location pet-input">
+
+                    <label class="pet-subtext">Extra details</label>
+                    <input type="text" class="comments pet-input">
+
+                    <button class="btnNewAppt pet-button">Add an appointment</button>
+                </form>
+            </div>
         
-        <div class="petMugShots">
-
-        <% pets.forEach( pet => { %>
-          <img class="petImg" src="<%= pet.image_url %>" alt="<%= pet.name %>" data-id="<%= pet.id %>"> 
-         <h3 class="petNameLabel"><%= pet.name %></h3>
-         <button class="btnShowEdit" data-id="<%= pet.id %>">edit</button> 
-         <button class="btnShowNewAppt" data-id="<%= pet.id %>">New Appt</button> 
-         <br><br>
-         <% }) %> 
-         
-
-        </div>
-
-        <img src="#" alt="">
-        <button class="btnAddNewPet">Add New Pet</button>
-    </div>
-
-    
-
-        <div class="newPet">
-        <form class="newPetForm" action ="">
-            
-          <h2>New Pet</h2>
-            <input type="hidden" class="pet-new-userId">
-            <label for="">Species</label>
-            <input type="text" class="pet-new-species">
-            <label for="">DOB</label>
-            <input type="date" class="pet-new-dob">
-            <label for="">name</label>
-            <input type="text" class="pet-new-name">
-            <label for="">image_url</label>
-            <input type="text" class="pet-new-image_url">
-            <button class="btnNewPet">create Pet</button>
-        </form>
-    </div>
-
-      <div class="editPet">
-        <form class="editPetForm" action ="">
-          <h2>Edit Pet</h2>
-            
-            <input class="userId" type="hidden" value="">
-            <input class="petId" type="hidden" value="">
-            <label for="">Species</label>
-            <input type="text" class="pet-edit-species">
-            <label for="">DOB</label>
-            <input type="date" class="pet-edit-dob">
-            <label for="">name</label>
-            <input type="text" class="pet-edit-name">
-            <label for="">image_url</label>
-            <input type="text" class="pet-edit-image_url">
-            <button class="btnEditPet">edit Pet</button>
-        </form>
-    </div>
 
 
-<div class="newAppointmet">
-        <h2>New Appointment</h2>
-        <form action ="" class="newApptForm">
-          
-            <input type="hidden" class="petID">
-            <input type="hidden" class="apptUserId" value="<%= user.id %>">
+            <div class="listAllAppointments">  
+                <h2>All Appointments</h2>  
+                    
+                <% pets.forEach( pet => { %>
+                <img src="<%= pet.image_url %>" alt="<%= pet.name %>">
+                
+                <% }) %> 
+            </div>
+        </div> <!-- Main panel-->
+    </div> <!-- Overall container -->
 
-            <label for="">ApptType</label>
-            <input type="text" class="appType">
-
-            <label for="">location</label>
-            <input type="text" class="location">
-
-            <label for="">apptDate</label>
-            <input type="date" class="apptDate">
-
-            <label for="">comments</label>
-            <input type="text" class="comments">
-
-            <button class="btnNewAppt">add New Appt</button>
-        </form>
-    </div>
- 
-
-
-    <div class="listAllAppointments">  
-        <h2>All Appointments</h2>  
-            
-            <% pets.forEach( pet => { %>
-         <img src="<%= pet.image_url %>" alt="<%= pet.name %>">
-         
-         <% }) %> 
-    </div>
-
-
-</div>
+</main>
 
     
 <script>
