@@ -27,7 +27,7 @@ router.post("/api/pets/new", (req, res) => {
 }) // creates new pet
 
 
-router.put("/api/pets/edit/:pet_id", (req, res) => {
+router.patch("/api/pets/edit", (req, res) => {
     db.query(
         "UPDATE pets SET species = $1, dob = $2, name = $3, image_url = $4 WHERE id = $5;",
         [
