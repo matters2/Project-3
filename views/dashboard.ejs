@@ -44,9 +44,7 @@
 
         <% pets.forEach( pet => { %>
          <img src="<%= pet.image_url %>" alt="<%= pet.name %>">
-         <a class="<%= pet.id %>" href="<%= pet.id %>" data-id="<%= pet.id %>">edit</a>
-        
-         
+         <button class="btnShowEdit" data-id="<%= pet.id %>">edit</button> 
          <% }) %> 
 
         </div>
@@ -77,8 +75,9 @@
       <div class="editPet">
           <h2>Edit Pet</h2>
         <form action ="">
-            <!-- <label for="">UserID</label> -->
-            <!--  <input type="text" class="userId" type=""> -->
+            
+            <input class="userId" type="hidden" value="">
+            <input class="petId" type="hidden" value="">
             <label for="">Species</label>
             <input type="text" class="pet-edit-species">
             <label for="">DOB</label>
@@ -87,7 +86,7 @@
             <input type="text" class="pet-edit-name">
             <label for="">image_url</label>
             <input type="text" class="pet-edit-image_url">
-            <button class="btnNewPet">edit Pet</button>
+            <button class="btnEditPet">edit Pet</button>
         </form>
     </div>
 
@@ -131,13 +130,15 @@
     
 <script>
 
-let editPet = document.querySelector('.petMugShots')
+let btnShowEditPet = document.querySelector('.btnShowEdit')
 let editFormSpecies = document.querySelector('.pet-edit-species')
 let editFormDob = document.querySelector('.pet-edit-dob')
 let editFormName = document.querySelector('.pet-edit-name')
 let editFormImageUrl = document.querySelector('.pet-edit-image_url')
+let editFormPetId = document.querySelector('.petId')
 
-editPet.addEventListener('click', (e) => {
+
+btnShowEditPet.addEventListener('click', (e) => {
     e.preventDefault()    
     // console.log(Number(e.target.dataset.id))
     let petId = (Number(e.target.dataset.id))
@@ -150,11 +151,28 @@ editPet.addEventListener('click', (e) => {
         editFormDob.value = resp.data[0].dob.slice(0,10)
         editFormName.value = resp.data[0].name
         editFormImageUrl.value = resp.data[0].image_url
+        editFormPetId.value = resp.data[0].id
     })
-
-
-    
  })
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
     
 </script>
 

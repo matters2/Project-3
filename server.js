@@ -74,13 +74,19 @@ app.get("/", (req, res) => {
 
     let dbPets = db.query(
         'select * from pets where user_id = $1',
-        [req.user.id],
+        // [req.user.id],
+        [1],
         (err, dbRes) => {
             res.render('dashboard', { 
                 pets: dbRes.rows,
-                user: req.user 
+                // user: req.user 
+                user: {
+                    "id": 1,
+                    "username": "ben",
+                    "email": "ben@email.com",
+                    "password_digest": "hahaha"
+            }
             })
-
         }
     )
     
