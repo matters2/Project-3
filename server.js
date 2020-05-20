@@ -70,6 +70,21 @@ app.use('/', userController)
 app.use('/', apptController)
 app.use('/', medsController)
 
+app.get("/", (req, res) => {
+
+    let dbPets = db.query(
+        'select * from pets where user_id = $1',
+        [req.user.id],
+        (err, dbRes) => {
+            res.render('dashboard', { 
+                pets: dbRes.rows,
+                user: req.user 
+            })
+
+        }
+    )
+    
+})
 
 app.get('/login', (req, res) => {
     res.render('login');
@@ -105,35 +120,6 @@ app.get('/logout', (req, res) => {
     res.redirect('/login');
 });
 
-app.get("/pet", (req, res) => {
-
-    let dbPets = [
-        {
-        id: 3,
-        name: "Poochie",
-        species: "dog",
-        dob: "2020-05-13",
-        image_url: "dog.jpg"
-        },
-        
-        {
-        id: 4,
-        name: "Puss n Boots",
-        species: "cat",
-        dob: "2019-10-09",
-        image_url: "cat.jpg"
-        },
-        {
-        id: 6,
-        name: "Smoothy",
-        species: "possum",
-        dob: "2018-02-28",
-        image_url: "possum.jpg"
-        }
-    ]
-    
-    res.render('dashboard', { pets: dbPets })
-})
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`)
