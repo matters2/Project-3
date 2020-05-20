@@ -8,6 +8,8 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const petController = require('./controllers/pet');
 const userController = require('./controllers/user');
+const apptController = require('./controllers/appointments');
+const medsController = require('./controllers/meds');
 // const passport = require('passport');
 // const Strategy = require('passport-local').Strategy;
 
@@ -54,6 +56,8 @@ app.use(express.static('public'))
 
 app.use('/', petController)
 app.use('/', userController)
+app.use('/', apptController)
+app.use('/', medsController)
 
 app.get("/", (req,res) => {
     res.send("hello world")
