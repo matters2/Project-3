@@ -19,4 +19,16 @@ router.post("/api/meds/new", (req, res) => {
 })
 
 
+router.get("/api/meds/:pet_id", (req, res) => {
+    db.query(
+        "SELECT * FROM meds WHERE pet_id = $1;",
+        [req.params.pet_id],
+        (err, dbRes) => {
+            res.json(dbRes.rows)
+        
+        }
+    )
+}) 
+
+
 module.exports = router
