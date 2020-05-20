@@ -29,10 +29,7 @@
 
         <div class="medications">
             <h2>Medications</h2>
-            <ul>
-                <li>Medication 1</li>
-                <li>Medication 2</li>
-            </ul>
+            <ul class="medsList"></ul>
         </div>
     </div>
 
@@ -43,11 +40,13 @@
         <div class="petMugShots">
 
         <% pets.forEach( pet => { %>
-          <img src="<%= pet.image_url %>" alt="<%= pet.name %>"> 
+          <img class="petImg" src="<%= pet.image_url %>" alt="<%= pet.name %>" data-id="<%= pet.id %>"> 
          <h3 class="petNameLabel"><%= pet.name %></h3>
          <button class="btnShowEdit" data-id="<%= pet.id %>">edit</button> 
          <button class="btnShowNewAppt" data-id="<%= pet.id %>">New Appt</button> 
+         <br><br>
          <% }) %> 
+         
 
         </div>
 
@@ -236,6 +235,34 @@ btnNewPet.addEventListener('click', e => {
     })
 
      newPetFrm.reset();
+
+})
+
+const petImg = document.querySelectorAll('.petImg')
+const medsList = document.querySelector('.medsList')
+
+petImg.forEach( petImage => {
+
+petImage.addEventListener('click', e => {
+    
+    let petImgId = e.target.dataset.id
+    const url = `/api/meds/${petImgId}`
+    axios.get(url).then(res => {
+    console.log(res.data.length)
+
+    if (res.data.length == 0) {
+        medsList.textContent = "No medications"  
+    } else {
+        medsList.textContent = ""
+        res.data.forEach(med => {
+            let li = document.createElement('li')
+            li.textContent = med.comments
+            medsList.appendChild(li)
+        })
+    }
+
+    })
+})
 
 })
 
