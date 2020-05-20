@@ -43,7 +43,7 @@
         <div class="petMugShots">
 
         <% pets.forEach( pet => { %>
-         <img src="<%= pet.image_url %>" alt="<%= pet.name %>">
+          <img src="<%= pet.image_url %>" alt="<%= pet.name %>"> 
          <h3 class="petNameLabel"><%= pet.name %></h3>
          <button class="btnShowEdit" data-id="<%= pet.id %>">edit</button> 
          <button class="btnShowNewAppt" data-id="<%= pet.id %>">New Appt</button> 
@@ -75,8 +75,8 @@
     </div>
 
       <div class="editPet">
-          <h2>Edit Pet</h2>
         <form class="editPetForm" action ="">
+          <h2>Edit Pet</h2>
             
             <input class="userId" type="hidden" value="">
             <input class="petId" type="hidden" value="">
@@ -93,12 +93,12 @@
     </div>
 
 
-
-    <div class="newAppointmet">
+<div class="newAppointmet">
         <h2>New Appointment</h2>
-        <form action ="">
+        <form action ="" class="newApptForm">
           
             <input type="hidden" class="petID">
+            <input type="hidden" class="apptUserId" value="<%= user.id %>">
 
             <label for="">ApptType</label>
             <input type="text" class="appType">
@@ -115,6 +115,7 @@
             <button class="btnNewAppt">add New Appt</button>
         </form>
     </div>
+ 
 
 
     <div class="listAllAppointments">  
@@ -140,11 +141,14 @@ let editFormName = document.querySelector('.pet-edit-name')
 let editFormImageUrl = document.querySelector('.pet-edit-image_url')
 let editFormPetId = document.querySelector('.petId')
 let newPetFrm = document.querySelector('.newPetForm');
-let editFrm = document.querySelector('.editPetForm');
+var editFrm = document.querySelector('.editPetForm');
 let btnAddNewPet = document.querySelector('.btnAddNewPet');
+
+let editPetFrm = document.querySelector('.editPetForm')
 
 // DOM manipulation
 newPetFrm.style.display = "none"
+editFrm.style.display = "none"
 
 
 
@@ -152,12 +156,15 @@ btnAddNewPet.addEventListener('click', (e) => {
     newPetFrm.style.display = "block"
 })
 
+
+
 //  console.log(allEditBtns)
 
 allEditBtns.forEach( (button) => {
 
     button.addEventListener('click', (e) => {
     e.preventDefault()    
+    editFrm.style.display = "block"
     // console.log(Number(e.target.dataset.id))
     let petId = (Number(e.target.dataset.id))
     console.log(petId)
