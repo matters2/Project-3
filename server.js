@@ -4,7 +4,6 @@ const express = require("express")
 const port = 8080
 const db = require("./db/config")
 const pwd = require("./models/password")
-const userdb = require("./models/func_sessions")
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const petController = require('./controllers/pet');
