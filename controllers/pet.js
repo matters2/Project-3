@@ -26,14 +26,24 @@ router.post("/api/pets/new", (req, res) => {
     )
 }) // creates new pet
 
-router.get("/api/pets/:user_id", (req, res) => {
+router.get("/api/pets/:username", (req, res) => {
     db.query(
-        "SELECT * FROM pets WHERE user_id = $1;",
-        [req.params.user_id],
+        "SELECT * FROM pets WHERE username = $1;",
+        [req.params.username],
         (err, dbRes) => {
             res.json(dbRes.rows)
         }
     )
-}) // select all pets by user_id
+}) // select all pets by username
+
+router.get("/api/pets/:username/:pet_id", (req, res) => {
+    db.query(
+        "SELECT * FROM pets WHERE username = $1 & id = $2;",
+        [req.params.username, req,params.pet_id],
+        (err, dbRes) => {
+            res.json(dbRes.rows)
+        }
+    )
+}) // select pet X by <username>
 
 module.exports = router
