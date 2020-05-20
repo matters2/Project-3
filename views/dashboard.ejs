@@ -44,37 +44,39 @@
 
         <% pets.forEach( pet => { %>
          <img src="<%= pet.image_url %>" alt="<%= pet.name %>">
+         <h3 class="petNameLabel"><%= pet.name %></h3>
          <button class="btnShowEdit" data-id="<%= pet.id %>">edit</button> 
+         <button class="btnShowNewAppt" data-id="<%= pet.id %>">New Appt</button> 
          <% }) %> 
 
         </div>
 
         <img src="#" alt="">
-        <button class="addPet">Add a Pet</button>
+        <button class="btnAddNewPet">Add New Pet</button>
     </div>
 
     
 
         <div class="newPet">
+        <form class="newPetForm" action ="">
+            
           <h2>New Pet</h2>
-        <form action ="">
-            <label for="">UserID</label>
-            <input type="text" class="userId">
+            <input type="hidden" class="pet-new-userId">
             <label for="">Species</label>
-            <input type="text" class="species">
+            <input type="text" class="pet-new-species">
             <label for="">DOB</label>
-            <input type="date" class="dob">
+            <input type="date" class="pet-new-dob">
             <label for="">name</label>
-            <input type="text" class="name">
+            <input type="text" class="pet-new-name">
             <label for="">image_url</label>
-            <input type="text" class="image_url">
-            <button class="btnNewPet">add New Pet</button>
+            <input type="text" class="pet-new-image_url">
+            <button class="btnNewPet">create Pet</button>
         </form>
     </div>
 
       <div class="editPet">
           <h2>Edit Pet</h2>
-        <form action ="">
+        <form class="editPetForm" action ="">
             
             <input class="userId" type="hidden" value="">
             <input class="petId" type="hidden" value="">
@@ -95,8 +97,8 @@
     <div class="newAppointmet">
         <h2>New Appointment</h2>
         <form action ="">
-            <label for="">PetID</label>
-            <input type="text" class="petId">
+          
+            <input type="hidden" class="petID">
 
             <label for="">ApptType</label>
             <input type="text" class="appType">
@@ -129,6 +131,7 @@
 
     
 <script>
+let allEditBtns = document.querySelectorAll('.btnShowEdit')
 
 let btnShowEditPet = document.querySelector('.btnShowEdit')
 let editFormSpecies = document.querySelector('.pet-edit-species')
@@ -136,9 +139,24 @@ let editFormDob = document.querySelector('.pet-edit-dob')
 let editFormName = document.querySelector('.pet-edit-name')
 let editFormImageUrl = document.querySelector('.pet-edit-image_url')
 let editFormPetId = document.querySelector('.petId')
+let newPetFrm = document.querySelector('.newPetForm');
+let editFrm = document.querySelector('.editPetForm');
+let btnAddNewPet = document.querySelector('.btnAddNewPet');
+
+// DOM manipulation
+newPetFrm.style.display = "none"
 
 
-btnShowEditPet.addEventListener('click', (e) => {
+
+btnAddNewPet.addEventListener('click', (e) => {
+    newPetFrm.style.display = "block"
+})
+
+//  console.log(allEditBtns)
+
+allEditBtns.forEach( (button) => {
+
+    button.addEventListener('click', (e) => {
     e.preventDefault()    
     // console.log(Number(e.target.dataset.id))
     let petId = (Number(e.target.dataset.id))
@@ -153,29 +171,70 @@ btnShowEditPet.addEventListener('click', (e) => {
         editFormImageUrl.value = resp.data[0].image_url
         editFormPetId.value = resp.data[0].id
     })
+        
  })
 
 
- 
+})
 
 
 
+ let btnEditPet = document.querySelector('.btnEditPet')
+
+btnEditPet.addEventListener('click', (e) => {
+        e.preventDefault() 
+      
+      var params = {
+        userId: <%= user.id %>,
+        species: editFormSpecies.value,
+        dob: editFormDob.value,
+        name: editFormName.value,
+        image_url: editFormImageUrl.value,
+        id: editFormPetId.value 
+    }
+
+    console.log(params)
+
+    const url = 'http://localhost:8080/api/pets/edit'
+    
+    axios.patch(url, params).then(res => {
+        console.log('bug')
+    })
+
+    
+     editFrm.reset();
+    
+        
+})
 
 
 
+const btnNewPet = document.querySelector('.btnNewPet')
 
+btnNewPet.addEventListener('click', e => {
+    e.preventDefault()
 
+    var params = {
+        userId: <%= user.id %>,
+        species: document.querySelector('.pet-new-species').value,
+        dob: document.querySelector('.pet-new-dob').value,
+        name: document.querySelector('.pet-new-name').value,
+        image_url: document.querySelector('.pet-new-image_url').value
+    }
 
+    const url = 'http://localhost:8080/api/pets/new'
+    
+    axios.post(url, params).then(res => {
+        console.log('bug')
+    })
 
+     newPetFrm.reset();
 
-
-
- 
-
+})
 
     
 </script>
 
-
+ <script src="/client2.js"></script>
 </body>
 </html>
