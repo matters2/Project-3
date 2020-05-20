@@ -5,19 +5,23 @@ let apptLocationI = document.querySelector('.location')
 let apptDateI = document.querySelector('.apptDate')
 let apptCommentsI = document.querySelector('.comments')
 let apptPetIdI = document.querySelector('.petId')
+let apptUserIdI = document.querySelector('.apptUserId')
+let allShowNewApptBtn = document.querySelectorAll('.btnShowNewAppt')
+let newApptForm = document.querySelector('.newApptForm')
 
 
-
-
+newApptForm.style.display = "none"
 // this will make the new appt form show with the pets id in a hidden input
-btnShowNewAppt.addEventListener('click', (e) => {   
-  let petId = e.target.dataset.id
-  apptPetIdI.value = petId
+allShowNewApptBtn.forEach( button => {
+  button.addEventListener('click', (e) => {   
+    let petId = e.target.dataset.id
+    apptPetIdI.value = petId
+    newApptForm.style.display = "block"
+  })
 })
 
 btnNewAppt.addEventListener('click', e => {
   e.preventDefault()
-  
   let url = 'http://localhost:8080/api/appointments/new'
 
   let params = {
@@ -25,7 +29,8 @@ btnNewAppt.addEventListener('click', e => {
     appType: apptTypeI.value,
     location: apptLocationI.value,
     apptDate: apptDateI.value,
-    comments: apptCommentsI.value
+    comments: apptCommentsI.value,
+    user_id: apptUserIdI.value
   }
 
   axios.post(url, params).then( resp => {
