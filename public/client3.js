@@ -155,7 +155,7 @@ petImg.forEach( petImage => {
                 let div = document.createElement('div')
                 div.innerHTML = 
                     '<h3 class="pet-selected">Pet Appointments</h3>' + 
-                    '<p>No appointments</p>'  
+                    '<p class="appt-subtext">No appointments</p>'  
                 div.classList.add('card')
                 apptList.appendChild(div)
             } else {
@@ -166,9 +166,9 @@ petImg.forEach( petImage => {
                     div.innerHTML = 
                     '<h3 class="pet-selected">Pet Appointments</h3>' + 
                     '<h3>' + 'Type: '+ appt.appt_type + '</h3>' + 
-                    '<p>' + 'Date: '+ appt.appt_date.slice(0,10) + '</p>' +
-                    '<p>' + 'Location: '+ appt.location + '</p>' +
-                    '<p>' + 'Comments: '+ appt.comments + '</p>' +
+                    '<p class="appt-subtext">' + 'Date: '+ appt.appt_date.slice(0,10) + '</p>' +
+                    '<p class="appt-subtext">' + 'Location: '+ appt.location + '</p>' +
+                    '<p class="appt-subtext">' + 'Comments: '+ appt.comments + '</p>' +
                     '<button class="pet-button" data-id="'+ appt.id + '"> Edit</button>'
                     div.classList.add('card')
                     apptList.appendChild(div)

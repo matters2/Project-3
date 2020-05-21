@@ -54,6 +54,7 @@ body {
 .layout_1_1 {
     margin: 20px auto;
     display: grid;
+    width: 800px;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
 }
@@ -177,6 +178,13 @@ background: rgb(241, 134, 34);
 
 
 
+.appt-subtext {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+
 .add-button {
     display: inline-block;
     color: white;
@@ -205,10 +213,13 @@ button {
 form {
     transition: all 0.2s ease-out;
 }
-
+ul {
+    padding-left: 15px;
+}
 li {
     list-style-type: none;
 }
 h3 {
-    margin-top: 0px;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
