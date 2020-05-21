@@ -34,7 +34,7 @@
                         <li>
                             <h3><%= appt.appt_type %></h3>
                             <h3><%= appt.location %></h3>
-                            <h3><%= appt.appt_date %></h3>
+                            <h3><%= appt.appt_date.toDateString() %></h3>
                             <h3><%= appt.comments %></h3>
                         </li>
                     <% }) %>
@@ -172,7 +172,7 @@
                 </ul> 
             </div>
 
-            <h3 class="pet-selected">Pet Medications</h3> 
+            <h3 class="pet-selected pet-med-title">Pet Medications</h3> 
             <div class="pet-meds">
                 <ul class="pet-med-list">
                 </ul>
