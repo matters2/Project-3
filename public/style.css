@@ -37,7 +37,7 @@ body {
 }
 .login-btn-passed {
     box-shadow: 0 0 10px grey;
-    background-color: #29ad2d80;
+    background-color: rgb(230, 150, 75);
 }
 .hero-image {
     display: flex;
@@ -173,7 +173,7 @@ background: rgb(241, 134, 34);
     display: inline-block;
     color: white;
     font-size: 1.5rem;
-    background-color: rgb(79, 79, 255);
+    background-color: rgb(230, 150, 75);
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
@@ -194,4 +194,8 @@ button {
 
 form {
     transition: all 0.2s ease-out;
+}
+
+li {
+    list-style-type: none;
 }
