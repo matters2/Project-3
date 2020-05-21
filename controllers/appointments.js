@@ -25,5 +25,16 @@ router.post("/api/appointments/new", (req, res) => {
     )
 })
 
+router.get("/api/appointments/:pet_id", (req, res) => {
+    db.query(
+        "SELECT * FROM appointments WHERE pet_id = $1;",
+        [req.params.pet_id],
+        (err, dbRes) => {
+            res.json(dbRes.rows)
+        
+        }
+    )
+}) 
+
 
 module.exports = router
