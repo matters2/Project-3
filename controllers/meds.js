@@ -4,20 +4,21 @@ const db = require("../db/config")
 
 router.post("/api/meds/new", (req, res) => {
     db.query(
-        "INSERT INTO meds (pet_id, comments) VALUES ($1, $2);",
+        "INSERT INTO meds (pet_id, comments, user_id) VALUES ($1, $2, $3);",
         [
             req.body.petId,
-            req.body.comments
+            req.body.comments,
+            req.body.userId
         ],
         (err, dbRes) => {
             res.json({
                 pet_id: req.body.petId,
-                comments: req.body.comments
+                comments: req.body.comments,
+                user_id: req.body.userId
             })
         }
     )
 })
-
 
 router.get("/api/meds/:pet_id", (req, res) => {
     db.query(
