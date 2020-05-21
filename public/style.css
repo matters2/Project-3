@@ -64,7 +64,9 @@ body {
 }
 .sublayout-horizontal {
     display: flex;
-    flex-wrap: wrap;
+    width: 100%;
+    overflow-x: scroll;
+    flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
 }
@@ -102,6 +104,7 @@ body {
     object-fit: cover;
     border-radius: 50%;
     border: 2px solid rgb(230, 150, 75);
+    cursor: pointer;
 }
 .card-button {
     display: block;
@@ -171,4 +174,8 @@ a {
 
 button {
     cursor: pointer;
+}
+
+form {
+    transition: all 0.2s ease-out;
 }
