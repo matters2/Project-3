@@ -1,18 +1,26 @@
 console.log("Server-side JS")
 
+////////// DEPENDENCIES ///////////
+
 const express = require("express")
-const port = 8080
-const db = require("./db/config")
-const pwd = require("./models/password")
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+const Strategy = require('passport-local').Strategy;
+
+////////// DEPENDENCIES ///////////
+
+
+////////// CONTROLLERS ///////////
+
+const db = require("./db/config")
+const pwd = require("./models/password")
 const petController = require('./controllers/pet');
 const userController = require('./controllers/user');
 const apptController = require('./controllers/appointments');
 const medsController = require('./controllers/meds');
-const passport = require('passport');
-const Strategy = require('passport-local').Strategy;
 
+////////// CONTROLLERS ///////////
 
 
 passport.use(new Strategy((username, password, cb) => {
@@ -42,33 +50,29 @@ passport.deserializeUser((id, cb) => {
 
 
 
-const app = express()
-
 ////////// MIDDLEWARE ///////////
 
-app.use(morgan("combined"))
+const app = express()
+
+app.use(morgan("combined")) // error logger
 
 app.use(bodyParser.json()) // reads params from body
 app.use(bodyParser.urlencoded({extended: true})) 
-
 
 app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-////////// MIDDLEWARE ///////////
-
 app.set('view engine', 'ejs')
 
-// app.get("/", (req,res) => { // this is to look at the user session stuff
-//     res.json(req.user)
-// })
 app.use(express.static('public'))
 app.use('/', petController)
 app.use('/', userController)
 app.use('/', apptController)
 app.use('/', medsController)
+
+////////// MIDDLEWARE ///////////
 
 
 app.get("/", (req, res) => {
@@ -147,6 +151,11 @@ app.get('/logout', (req, res) => {
 });
 
 
+////////// LISTENER ///////////
+
+const port = process.env.PORT || 8080
 app.listen(port, () => {
     console.log(`listening on port ${port}`)
 })
+
+////////// LISTENER ///////////
