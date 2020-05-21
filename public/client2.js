@@ -9,6 +9,13 @@ let apptUserIdI = document.querySelector('.apptUserId')
 let allShowNewApptBtn = document.querySelectorAll('.btnShowNewAppt')
 let newApptForm = document.querySelector('.newApptForm')
 
+let newMedForm = document.querySelector('.newMedForm')
+let btnNewMed = document.querySelector('.btnNewMed')
+let medPetIdI = document.querySelector('.petIdMed')
+let btnShowNewMed = document.querySelector('.btnShowNewMed')
+let medComments = document.querySelector('.comments-meds')
+let medUserId = document.querySelector('.medUserId')
+
 
 
 newApptForm.style.display = "none"
@@ -28,7 +35,7 @@ allShowNewApptBtn.forEach( button => {
 btnNewAppt.addEventListener('click', e => {
   e.preventDefault()
   let url = 'http://localhost:8080/api/appointments/new'
-
+  
   let params = {
     petId: apptPetIdI.value,
     appType: apptTypeI.value,
@@ -37,10 +44,43 @@ btnNewAppt.addEventListener('click', e => {
     comments: apptCommentsI.value,
     user_id: apptUserIdI.value
   }
-
+  
   axios.post(url, params).then( resp => {
-   // remove the innerHTML of the ul for appts and reload them making them all dynamically
-   
+    // remove the innerHTML of the ul for appts and reload them making them all dynamically
+    
   })
   
 })
+newMedForm.style.display = "none"
+
+btnShowNewMed.addEventListener('click', e => {
+  e.preventDefault()
+  
+  if (newMedForm.style.display == "none") {
+    newMedForm.style.display = "block"
+  } else if (newMedForm.style.display == "block") {
+    newMedForm.style.display = "none"
+  }
+
+  var petIdMed = e.target.dataset.id
+  medPetIdI.value = petIdMed
+})
+
+btnNewMed.addEventListener('click', e => {
+  e.preventDefault()
+
+  let url = 'http://localhost:8080/api/meds/new'
+  
+  let params = {
+    petId: medPetIdI.value,
+    comments: medComments.value,
+    userId: medUserId.value
+  }
+  
+  axios.post(url, params).then( resp => {
+    // remove the innerHTML of the ul for appts and reload them making them all dynamically
+    
+  })
+  
+})
+

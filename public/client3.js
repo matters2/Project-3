@@ -159,11 +159,11 @@ petImage.addEventListener('click', e => {
     } else {
         apptList.textContent = ""
         res.data.forEach(appt => {
-          
+            
             let li = document.createElement('li')
             li.innerHTML = '<h3>' + 'type: '+ appt.appt_type + '</h3>' + 
             '<h3>' + 'location: '+ appt.location + '</h3>' +
-            '<h3>' + 'date: '+ appt.appt_date + '</h3>' +
+            '<h3>' + 'date: '+ appt.appt_date.slice(0,10) + '</h3>' +
             '<h3>' + 'comments: '+ appt.comments + '</h3>' +
             '<button data-id="'+ appt.id + '"> edit</button><hr>'
             apptList.appendChild(li)
