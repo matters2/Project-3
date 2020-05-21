@@ -39,7 +39,7 @@
         <div class="sublayout"> <!-- Main panel-->
             
             <div class="petsList">
-                <h2>Check out your pets</h2>
+                <h2>Check out your pets &emsp;<button class="btnAddNewPet add-button">+</button><span class="status-element"> Add a pet?</span></h2>
                 
                 <div class="petMugShots sublayout-horizontal">
 
@@ -52,7 +52,7 @@
                     </div>
                     <% }) %> 
                 
-                <div><button class="btnAddNewPet add-button">+</button>&ensp; Add a pet?</div>
+                
                 </div>
 
             </div>
@@ -86,7 +86,7 @@
 
             <div class="editPet">
                 <form class="editPetForm" action ="">
-                <h2>Edit Pet</h2>
+                <h2>Pet's Information</h2>
                     
                     <input class="userId" type="hidden" value="">
                     <input class="petId" type="hidden" value="">
@@ -170,7 +170,11 @@ editFrm.style.display = "none"
 
 
 btnAddNewPet.addEventListener('click', (e) => {
+    if (newPetFrm.style.display == "none") {
     newPetFrm.style.display = "block"
+    } else if (newPetFrm.style.display == "block") {
+    newPetFrm.style.display = "none"
+    }
 })
 
 
@@ -180,30 +184,31 @@ btnAddNewPet.addEventListener('click', (e) => {
 allEditBtns.forEach( (button) => {
 
     button.addEventListener('click', (e) => {
-    e.preventDefault()    
-    editFrm.style.display = "block"
-    // console.log(Number(e.target.dataset.id))
-    let petId = (Number(e.target.dataset.id))
-    console.log(petId)
-    let url = `http://localhost:8080/api/pets/${petId}`
-    console.log(url)
-    axios.get(url).then( resp => {
-        console.log(resp.data)
-        editFormSpecies.value = resp.data[0].species
-        editFormDob.value = resp.data[0].dob.slice(0,10)
-        editFormName.value = resp.data[0].name
-        editFormImageUrl.value = resp.data[0].image_url
-        editFormPetId.value = resp.data[0].id
-    })
-        
- })
-
-
+        e.preventDefault()
+        if (editFrm.style.display == "block") {
+            editFrm.style.display = "none"
+        } else if (editFrm.style.display == "none") {
+            editFrm.style.display = "block"
+            // console.log(Number(e.target.dataset.id))
+            let petId = (Number(e.target.dataset.id))
+            console.log(petId)
+            let url = `http://localhost:8080/api/pets/${petId}`
+            console.log(url)
+            axios.get(url).then( resp => {
+                console.log(resp.data)
+                editFormSpecies.value = resp.data[0].species
+                editFormDob.value = resp.data[0].dob.slice(0,10)
+                editFormName.value = resp.data[0].name
+                editFormImageUrl.value = resp.data[0].image_url
+                editFormPetId.value = resp.data[0].id
+            })
+        } 
+    }) // Edit pet's details handler
 })
 
 
 
- let btnEditPet = document.querySelector('.btnEditPet')
+let btnEditPet = document.querySelector('.btnEditPet')
 
 btnEditPet.addEventListener('click', (e) => {
         e.preventDefault() 
