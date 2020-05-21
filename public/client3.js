@@ -1,6 +1,5 @@
 let allEditBtns = document.querySelectorAll('.btnShowEdit')
 
-let btnShowEditPet = document.querySelector('.btnShowEdit')
 let editFormSpecies = document.querySelector('.pet-edit-species')
 let editFormDob = document.querySelector('.pet-edit-dob')
 let editFormName = document.querySelector('.pet-edit-name')
@@ -21,11 +20,7 @@ editFrm.style.display = "none"
 
 
 btnAddNewPet.addEventListener('click', (e) => {
-    if (newPetFrm.style.display == "none") {
     newPetFrm.style.display = "block"
-    } else if (newPetFrm.style.display == "block") {
-    newPetFrm.style.display = "none"
-    }
 })
 
 
@@ -36,24 +31,20 @@ allEditBtns.forEach( (button) => {
 
     button.addEventListener('click', (e) => {
         e.preventDefault()
-        if (editFrm.style.display == "block") {
-            editFrm.style.display = "none"
-        } else if (editFrm.style.display == "none") {
-            editFrm.style.display = "block"
-            // console.log(Number(e.target.dataset.id))
-            let petId = (Number(e.target.dataset.id))
-            console.log(petId)
-            let url = `http://localhost:8080/api/pets/${petId}`
-            console.log(url)
-            axios.get(url).then( resp => {
-                console.log(resp.data)
-                editFormSpecies.value = resp.data[0].species
-                editFormDob.value = resp.data[0].dob.slice(0,10)
-                editFormName.value = resp.data[0].name
-                editFormImageUrl.value = resp.data[0].image_url
-                editFormPetId.value = resp.data[0].id
-            })
-        } 
+        editFrm.style.display = "block"
+        // console.log(Number(e.target.dataset.id))
+        let petId = (Number(e.target.dataset.id))
+        console.log(petId)
+        let url = `http://localhost:8080/api/pets/${petId}`
+        console.log(url)
+        axios.get(url).then( resp => {
+            console.log(resp.data)
+            editFormSpecies.value = resp.data[0].species
+            editFormDob.value = resp.data[0].dob.slice(0,10)
+            editFormName.value = resp.data[0].name
+            editFormImageUrl.value = resp.data[0].image_url
+            editFormPetId.value = resp.data[0].id
+        })
     }) // Edit pet's details handler
 })
 
