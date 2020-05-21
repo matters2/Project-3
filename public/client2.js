@@ -38,7 +38,17 @@ btnNewAppt.addEventListener('click', e => {
   }
 
   axios.post(url, params).then( resp => {
-    // append this to the new appts
+    let newApptDiv = document.createElement('div')
+    let apptTypeP = document.createElement('p')
+    apptTypeP.textContent = params.appType
+    let apptLocP = document.createElement('p')
+    apptLocP.textContent = params.location
+    let apptDateP = document.createElement('p')
+    apptDateP.textContent = params.apptDate
+    let apptComP = document.createElement('p')
+    apptComP.textContent = params.comments
+    let apptEditBtn = document.createElement('button')
+    newApptLi.dataset.id = params.petId
   })
   
 })
