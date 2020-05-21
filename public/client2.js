@@ -14,9 +14,13 @@ newApptForm.style.display = "none"
 // this will make the new appt form show with the pets id in a hidden input
 allShowNewApptBtn.forEach( button => {
   button.addEventListener('click', (e) => {   
-    let petId = e.target.dataset.id
-    apptPetIdI.value = petId
-    newApptForm.style.display = "block"
+    if (newApptForm.style.display == "block") {
+      newApptForm.style.display = "none"
+    } else if (newApptForm.style.display == "none") {
+      newApptForm.style.display = "block"
+      let petId = e.target.dataset.id
+      apptPetIdI.value = petId
+    }
   })
 })
 

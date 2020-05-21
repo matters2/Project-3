@@ -9,7 +9,8 @@ body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .main {
-    min-height: 100vh;
+    height: 100vh;
+    overflow-y: scroll;
     background-color: rgba(255, 255, 255, .8);
     width: 80%;
     margin: 0 auto;
@@ -64,11 +65,28 @@ body {
 }
 .sublayout-horizontal {
     display: flex;
-    flex-wrap: wrap;
+    width: 800px;
+    overflow-x: scroll;
+    white-space: nowrap;
+    flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
 }
-
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+box-shadow: inset 0 0 5px grey; 
+border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+background: rgb(230, 150, 75); 
+border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+background: rgb(241, 134, 34); 
+}
 
 
 .status-header {
@@ -92,7 +110,7 @@ body {
     padding: 10px;
     border: none;
     border-radius: 10px;
-    margin: 0 20px 10px 0;
+    margin: 0 20px 20px 0;
     box-shadow: 2px 2px 2px rgb(230, 150, 75);
     background-color: rgba(255, 255, 255, 0.7);
 }
@@ -102,6 +120,7 @@ body {
     object-fit: cover;
     border-radius: 50%;
     border: 2px solid rgb(230, 150, 75);
+    cursor: pointer;
 }
 .card-button {
     display: block;
@@ -171,4 +190,8 @@ a {
 
 button {
     cursor: pointer;
+}
+
+form {
+    transition: all 0.2s ease-out;
 }
