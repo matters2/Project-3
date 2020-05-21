@@ -1,9 +1,16 @@
 const pg = require('pg');
+let pool
 
-const pool = new pg.Pool({
-    database: 'mypet',
-    password: 'ubuntu'
-})
+if (process.env.PRODUCTION) {
+    pool = new pg.Pool({
+        connectionString: process.env.DATABASE_URL
+    })
+} else {
+    pool = new pg.Pool({
+        database: 'mypet',
+        password: 'ubuntu'
+    })
+}
 
 module.exports = {
     query: (sql, params, callbackFn) => {
