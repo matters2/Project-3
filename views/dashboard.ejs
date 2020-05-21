@@ -16,6 +16,7 @@
 
     <header class="status-header">
         <h2 class="status-element">Logged in as <%= user.username %> //</h2>
+        <input class="hidden-id" type="hidden" value="<%= user.id%>">
         <button class="status-element">Logout?</button>
         <img class="status-element" height="50px"src="https://i.pinimg.com/originals/37/a8/d8/37a8d8ddeb69604f4a042ddfa345a577.png">
     </header>
@@ -23,16 +24,16 @@
     <div class="layout_3_7"> <!-- Overall container -->
 
         <aside class="sublayout"> <!-- Left sidebar-->
-            <h2>Calendar</h2>
+            
 
-            <ul>
-                <li>Appointment 1</li>
-                <li>Appointment 2</li>
-            </ul>
+            <div class="all-appointments">
+                <h2>Appointments</h2>
+                <ul class="all-apptList"></ul>
+            </div>
 
-                <div class="medications">
+                <div class="all-medications">
                     <h2>Medications</h2>
-                    <ul class="medsList"></ul>
+                    <ul class="all-medsList"></ul>
                 </div>
         </aside> <!-- Left sidebar-->
 
@@ -132,15 +133,17 @@
                 </form>
             </div>
         
+        
+            <h3 class="pet-selected">Pet Appointments</h3>
+            <div class="pet-appointments">  
+                <ul class="pet-appt-list">
+                </ul> 
+            </div>
 
-
-            <div class="listAllAppointments">  
-                <h2>All Appointments</h2>  
-                    
-                <% pets.forEach( pet => { %>
-                <img src="<%= pet.image_url %>" alt="<%= pet.name %>">
-                
-                <% }) %> 
+            <h3 class="pet-selected">Pet Medications</h3> 
+            <div class="pet-meds">
+                <ul class="pet-med-list">
+                </ul>
             </div>
         </div> <!-- Main panel-->
     </div> <!-- Overall container -->
@@ -148,7 +151,8 @@
 </main>
 
     
-<script>
+<!-- <script>
+
 let allEditBtns = document.querySelectorAll('.btnShowEdit')
 
 let btnShowEditPet = document.querySelector('.btnShowEdit')
@@ -262,7 +266,7 @@ btnNewPet.addEventListener('click', e => {
 })
 
 const petImg = document.querySelectorAll('.petImg')
-const medsList = document.querySelector('.medsList')
+const medsList = document.querySelector('.pet-meds')
 
 petImg.forEach( petImage => {
 
@@ -274,7 +278,10 @@ petImage.addEventListener('click', e => {
     console.log(res.data.length)
 
     if (res.data.length == 0) {
-        medsList.textContent = "No medications"  
+        // medsList.textContent = "No medications" 
+        let li = document.createElement('li')
+            li.textContent = "No medications"
+            medsList.appendChild(li) 
     } else {
         medsList.textContent = ""
         res.data.forEach(med => {
@@ -289,9 +296,36 @@ petImage.addEventListener('click', e => {
 
 })
 
-    
-</script>
+const apptList = document.querySelector('.pet-appointments')
 
- <script src="/client2.js"></script>
+petImg.forEach( petImage => {
+
+petImage.addEventListener('click', e => {
+    
+    let petImgId = e.target.dataset.id
+    const url = `/api/appointments/${petImgId}`
+    axios.get(url).then(res => {
+    console.log(res.data.length)
+
+    if (res.data.length == 0) {
+        apptList.textContent = "No appointments"  
+    } else {
+        apptList.textContent = ""
+        res.data.forEach(appt => {
+            let li = document.createElement('li')
+            li.textContent = appt.comments
+            apptList.appendChild(li)
+        })
+    }
+
+    })
+})
+
+})
+    
+</script> -->
+
+<script src="/client2.js"></script>
+<script src="/client3.js"></script>
 </body>
 </html>
