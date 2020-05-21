@@ -28,7 +28,14 @@ passport.use(new Strategy((username, password, cb) => {
         "select * from users where username = $1",
         [username],
         (err, dbRes) => {
-          return cb(null, dbRes.rows[0])
+            if (dbRes.rows.length === 0) {
+                return cb(null, false)
+                
+            } else {
+                pwd.pwCheck(dbRes.rows[0], password, cb)
+            }
+
+            // return cb(null, dbRes.rows[0])
         }
     )
 }));
@@ -76,13 +83,21 @@ app.use('/', medsController)
 
 
 app.get("/", (req, res) => {
+
+    // if (!req.user) {
+    //     res.redirect('/login')
+    // }
+
     let user = {
         "id": 1,
         "username": "ben",
         "email": "ben@email.com",
         "password_digest": "hahaha"
     }
-    let userId = 1 //[req.user.id]
+
+    // let user = req.user
+    let userId = 1
+    // let userId = user.id
 
     db.query(
         'select * from pets where user_id = $1',
