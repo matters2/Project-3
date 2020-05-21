@@ -51,6 +51,12 @@ body {
 }
 
 
+.layout_1_1 {
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
 .layout_3_7 {
     margin: 0 auto;
     display: grid;
@@ -202,4 +208,7 @@ form {
 
 li {
     list-style-type: none;
+}
+h3 {
+    margin-top: 0px;
 }
