@@ -106,8 +106,9 @@ btnNewPet.addEventListener('click', e => {
     
     axios.post(url, params).then(res => {
         console.log('bug')
+        location.reload();
     })
-
+   
      newPetFrm.reset();
 
 })
