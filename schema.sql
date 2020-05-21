@@ -29,5 +29,6 @@ create table appointments (
 create table meds (
   id serial primary key,
   pet_id integer,
-  comments text
+  comments text,
+  user_id integer
 );

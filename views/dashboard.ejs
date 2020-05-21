@@ -28,12 +28,30 @@
 
             <div class="all-appointments">
                 <h2>Appointments</h2>
-                <ul class="all-apptList"></ul>
+                <ul class="all-apptList">
+
+                    <% appts.forEach(appt => {%>
+                        <li>
+                            <h3><%= appt.appt_type %></h3>
+                            <h3><%= appt.location %></h3>
+                            <h3><%= appt.appt_date %></h3>
+                            <h3><%= appt.appt_date %></h3>
+                        </li>
+                    <% }) %>
+                </ul>
             </div>
 
                 <div class="all-medications">
                     <h2>Medications</h2>
-                    <ul class="all-medsList"></ul>
+                    <ul class="all-medsList">
+
+                        <% meds.forEach(med => {%>
+                        <li>
+                            <h3><%= med.comments %></h3>
+                        </li>
+                    <% }) %>
+
+                    </ul>
                 </div>
         </aside> <!-- Left sidebar-->
 
