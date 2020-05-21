@@ -49,22 +49,8 @@ router.patch("/api/pets/edit", (req, res) => {
             })
         }
     )
-}) // creates new pet
+}) // update pet details
 
-
-
-
-
-
-// router.get("/api/pets/:username", (req, res) => {
-//     db.query(
-//         "SELECT * FROM pets WHERE username = $1;",
-//         [req.params.username],
-//         (err, dbRes) => { 
-//             res.json(dbRes.rows)
-//         }
-//     )
-// }) // select all pets by username
 
 router.get("/api/pets/:pet_id", (req, res) => {
     db.query(
@@ -75,6 +61,6 @@ router.get("/api/pets/:pet_id", (req, res) => {
         
         }
     )
-}) // select pet X by <username>
+}) // select a pet by id
 
 module.exports = router

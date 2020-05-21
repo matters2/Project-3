@@ -70,27 +70,47 @@ app.use('/', userController)
 app.use('/', apptController)
 app.use('/', medsController)
 
-app.get("/", (req, res) => {
 
-    let dbPets = db.query(
+app.get("/", (req, res) => {
+    let user = {
+        "id": 1,
+        "username": "ben",
+        "email": "ben@email.com",
+        "password_digest": "hahaha"
+    }
+    let userId = 1 //[req.user.id]
+
+    db.query(
         'select * from pets where user_id = $1',
-        // [req.user.id],
-        [1],
-        (err, dbRes) => {
-            res.render('dashboard', { 
-                pets: dbRes.rows,
-                // user: req.user 
-                user: {
-                    "id": 1,
-                    "username": "ben",
-                    "email": "ben@email.com",
-                    "password_digest": "hahaha"
-            }
-            })
+        [userId],
+        (err, dbResPets) => {
+            let pets = dbResPets.rows
+
+            db.query(
+                'select * from meds where user_id = $1',
+                [userId],
+                (err,dbResMeds) => {
+                    let meds = dbResMeds.rows
+
+                    db.query(
+                        'select * from appointments where user_id = $1',
+                        [userId],
+                        (err, dbResAppt) => {
+                            let appts = dbResAppt.rows
+
+                            res.render('dashboard', {
+                                pets: pets,
+                                meds: meds,
+                                appts: appts,
+                                user: user
+                            })
+                        }
+                    ) // dbAppts query
+                }
+            ) // dbMeds query
         }
-    )
-    
-})
+    ) // dbPets query
+}) // app.get closure
 
 app.get('/login', (req, res) => {
     res.render('login');
