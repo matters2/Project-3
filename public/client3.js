@@ -115,10 +115,16 @@ btnNewPet.addEventListener('click', e => {
 const petImg = document.querySelectorAll('.petImg')
 const medsList = document.querySelector('.pet-meds')
 
-petImg.forEach( petImage => {
+const apptsList = document.querySelector('.pet-med-title')
 
+
+petImg.forEach( petImage => {
+    let petApptTitle = document.querySelector('.pet-selected')
+    petApptTitle.style.display = 'none'
+    apptsList.style.display = 'none'
 petImage.addEventListener('click', e => {
-    
+    petApptTitle.style.display = 'block'
+    apptsList.style.display = 'block'
     let petImgId = e.target.dataset.id
     const url = `/api/meds/${petImgId}`
     axios.get(url).then(res => {
