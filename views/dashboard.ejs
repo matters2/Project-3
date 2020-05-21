@@ -32,10 +32,11 @@
 
                     <% appts.forEach(appt => {%>
                         <li>
-                            <h3><%= appt.appt_type %></h3>
-                            <h3><%= appt.location %></h3>
                             <h3><%= appt.appt_date.toDateString() %></h3>
-                            <h3><%= appt.comments %></h3>
+                            <p class="appt-subtext">Pet number <%= appt.pet_id %></p>
+                            <p class="appt-subtext"><%= appt.appt_type %></p>
+                            <p class="appt-subtext"><%= appt.comments %></p>
+                            <br>
                         </li>
                     <% }) %>
                 </ul>
@@ -47,7 +48,9 @@
 
                         <% meds.forEach(med => {%>
                         <li>
-                            <h3><%= med.comments %></h3>
+                            <h3>Pet number <%= med.pet_id %></h3>
+                            <p class="appt-subtext"><%= med.comments %></p>
+                            <br>
                         </li>
                     <% }) %>
 
