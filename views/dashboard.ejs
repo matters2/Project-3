@@ -35,7 +35,7 @@
                             <h3><%= appt.appt_type %></h3>
                             <h3><%= appt.location %></h3>
                             <h3><%= appt.appt_date %></h3>
-                            <h3><%= appt.appt_date %></h3>
+                            <h3><%= appt.comments %></h3>
                         </li>
                     <% }) %>
                 </ul>
@@ -67,7 +67,8 @@
                         <img class="petImg card-portrait" src="https://i.pinimg.com/originals/37/a8/d8/37a8d8ddeb69604f4a042ddfa345a577.png<%=// pet.image_url %>" alt="<%= pet.name %>" data-id="<%= pet.id %>"> 
                         <h3 class="petNameLabel card-label"><%= pet.name %></h3>
                         <button class="btnShowEdit card-button" data-id="<%= pet.id %>">Details</button> 
-                        <button class="btnShowNewAppt card-button" data-id="<%= pet.id %>">Appointments</button> 
+                        <button class="btnShowNewAppt card-button" data-id="<%= pet.id %>">Appointments</button>
+                        <button class="btnShowNewMed card-button" data-id="<%= pet.id %>">New Medication</button> 
                     </div>
                     <% }) %> 
                 
@@ -150,7 +151,20 @@
                     <button class="btnNewAppt pet-button">Add an appointment</button>
                 </form>
             </div>
-        
+
+            <div class="newMedication">
+                <form action ="" class="newMedForm">
+                <h2>New Medication</h2>
+                
+                    <input type="hidden" class="petIdMed">
+                    <input type="hidden" class="medUserId" value="<%= user.id %>">
+
+                    <label class="pet-subtext">Comments</label>
+                    <input type="text" class="comments-meds pet-input">
+
+                    <button class="btnNewMed pet-button">Add new medication</button>
+                </form>
+            </div>
         
             <h3 class="pet-selected">Pet Appointments</h3>
             <div class="pet-appointments">  
