@@ -1,6 +1,5 @@
 let allEditBtns = document.querySelectorAll('.btnShowEdit')
 
-let btnShowEditPet = document.querySelector('.btnShowEdit')
 let editFormSpecies = document.querySelector('.pet-edit-species')
 let editFormDob = document.querySelector('.pet-edit-dob')
 let editFormName = document.querySelector('.pet-edit-name')
@@ -21,40 +20,30 @@ editFrm.style.display = "none"
 
 
 btnAddNewPet.addEventListener('click', (e) => {
-    if (newPetFrm.style.display == "none") {
     newPetFrm.style.display = "block"
-    } else if (newPetFrm.style.display == "block") {
-    newPetFrm.style.display = "none"
-    }
 })
 
 
-
-//  console.log(allEditBtns)
 
 allEditBtns.forEach( (button) => {
 
     button.addEventListener('click', (e) => {
         e.preventDefault()
-        if (editFrm.style.display == "block") {
-            editFrm.style.display = "none"
-        } else if (editFrm.style.display == "none") {
-            editFrm.style.display = "block"
-            // console.log(Number(e.target.dataset.id))
-            let petId = (Number(e.target.dataset.id))
-            console.log(petId)
-            let url = `http://localhost:8080/api/pets/${petId}`
-            console.log(url)
-            axios.get(url).then( resp => {
-                console.log(resp.data)
-                editFormSpecies.value = resp.data[0].species
-                editFormDob.value = resp.data[0].dob.slice(0,10)
-                editFormName.value = resp.data[0].name
-                editFormImageUrl.value = resp.data[0].image_url
-                editFormPetId.value = resp.data[0].id
-            })
-        } 
-    }) // Edit pet's details handler
+        editFrm.style.display = "block"
+        // console.log(Number(e.target.dataset.id))
+        let petId = (Number(e.target.dataset.id))
+        console.log(petId)
+        let url = `http://localhost:8080/api/pets/${petId}`
+        console.log(url)
+        axios.get(url).then( resp => {
+            console.log(resp.data)
+            editFormSpecies.value = resp.data[0].species
+            editFormDob.value = resp.data[0].dob.slice(0,10)
+            editFormName.value = resp.data[0].name
+            editFormImageUrl.value = resp.data[0].image_url
+            editFormPetId.value = resp.data[0].id
+        })
+    }) // displays pet's details for editting
 })
 
 
@@ -62,9 +51,9 @@ allEditBtns.forEach( (button) => {
 let btnEditPet = document.querySelector('.btnEditPet')
 
 btnEditPet.addEventListener('click', (e) => {
-        e.preventDefault() 
+    e.preventDefault() 
       
-      var params = {
+    var params = {
         userId: userId,
         species: editFormSpecies.value,
         dob: editFormDob.value,
@@ -80,18 +69,16 @@ btnEditPet.addEventListener('click', (e) => {
     axios.patch(url, params).then(res => {
         console.log('bug')
     })
-
     
-     editFrm.reset();
-    
-        
-})
+    editFrm.reset();
+            
+}) // update pet details to db
 
 
 
-const btnNewPet = document.querySelector('.btnNewPet')
+const btnPostNewPet = document.querySelector('.btnNewPet')
 
-btnNewPet.addEventListener('click', e => {
+btnPostNewPet.addEventListener('click', e => {
     e.preventDefault()
 
     var params = {
@@ -111,42 +98,44 @@ btnNewPet.addEventListener('click', e => {
    
      newPetFrm.reset();
 
-})
+}) // adds new pet to db
 
 const petImg = document.querySelectorAll('.petImg')
 const medsList = document.querySelector('.pet-meds')
 
-const apptsList = document.querySelector('.pet-med-title')
+const medListTitle = document.querySelector('.pet-med-title')
+const petMedsCard = document.querySelector(".pet-meds")
 
-
+let petApptTitle = document.querySelector('.pet-selected')
+petApptTitle.style.display = 'none'
+medListTitle.style.display = 'none'
 petImg.forEach( petImage => {
-    let petApptTitle = document.querySelector('.pet-selected')
-    petApptTitle.style.display = 'none'
-    apptsList.style.display = 'none'
-petImage.addEventListener('click', e => {
-    petApptTitle.style.display = 'block'
-    apptsList.style.display = 'block'
-    let petImgId = e.target.dataset.id
-    const url = `/api/meds/${petImgId}`
-    axios.get(url).then(res => {
-    console.log(res.data.length)
+    petImage.addEventListener('click', e => {
+        petApptTitle.style.display = 'block'
+        medListTitle.style.display = 'block'
+        petMedsCard.classList.add("card")
+        let petImgId = e.target.dataset.id
+        const url = `/api/meds/${petImgId}`
+        axios.get(url).then(res => {
+            console.log(res.data.length)
 
-    if (res.data.length == 0) {
-        // medsList.textContent = "No medications" 
-        let li = document.createElement('li')
-            li.textContent = "No medications"
-            medsList.appendChild(li) 
-    } else {
-        medsList.textContent = ""
-        res.data.forEach(med => {
-            let li = document.createElement('li')
-            li.textContent = med.comments
-            medsList.appendChild(li)
+            if (res.data.length == 0) {
+                medsList.innerHTML = '<h3 class="pet-selected pet-med-title">Pet Medications</h3>'
+                // medsList.textContent = "No medications" 
+                let li = document.createElement('li')
+                li.textContent = "No medications"
+                medsList.appendChild(li) 
+            } else {
+                medsList.innerHTML = '<h3 class="pet-selected pet-med-title">Pet Medications</h3>'
+                res.data.forEach(med => {
+                    let li = document.createElement('li')
+                    li.textContent = med.comments
+                    medsList.appendChild(li)
+                })
+            }
+
         })
-    }
-
-    })
-})
+    }) // displays meds when pet portrait is clicked
 
 })
 
@@ -154,30 +143,39 @@ const apptList = document.querySelector('.pet-appointments')
 
 petImg.forEach( petImage => {
 
-petImage.addEventListener('click', e => {
-    
-    let petImgId = e.target.dataset.id
-    const url = `/api/appointments/${petImgId}`
-    axios.get(url).then(res => {
-    console.log(res.data.length)
+    petImage.addEventListener('click', e => {
+        
+        let petImgId = e.target.dataset.id
+        const url = `/api/appointments/${petImgId}`
+        axios.get(url).then(res => {
+            console.log(res.data.length)
 
-    if (res.data.length == 0) {
-        apptList.textContent = "No appointments"  
-    } else {
-        apptList.textContent = ""
-        res.data.forEach(appt => {
-            
-            let li = document.createElement('li')
-            li.innerHTML = '<h3>' + 'type: '+ appt.appt_type + '</h3>' + 
-            '<h3>' + 'location: '+ appt.location + '</h3>' +
-            '<h3>' + 'date: '+ appt.appt_date.slice(0,10) + '</h3>' +
-            '<h3>' + 'comments: '+ appt.comments + '</h3>' +
-            '<button data-id="'+ appt.id + '"> edit</button><hr>'
-            apptList.appendChild(li)
+            if (res.data.length == 0) {
+                apptList.innerHTML = ""
+                let div = document.createElement('div')
+                div.innerHTML = 
+                    '<h3 class="pet-selected">Pet Appointments</h3>' + 
+                    '<p>No appointments</p>'  
+                div.classList.add('card')
+                apptList.appendChild(div)
+            } else {
+                apptList.innerHTML = ""
+                res.data.forEach(appt => {
+                    
+                    let div = document.createElement('div')
+                    div.innerHTML = 
+                    '<h3 class="pet-selected">Pet Appointments</h3>' + 
+                    '<h3>' + 'Type: '+ appt.appt_type + '</h3>' + 
+                    '<p>' + 'Date: '+ appt.appt_date.slice(0,10) + '</p>' +
+                    '<p>' + 'Location: '+ appt.location + '</p>' +
+                    '<p>' + 'Comments: '+ appt.comments + '</p>' +
+                    '<button class="pet-button" data-id="'+ appt.id + '"> Edit</button>'
+                    div.classList.add('card')
+                    apptList.appendChild(div)
+                })
+            }
+
         })
-    }
-
-    })
-})
+    }) // displays appointments when pet portrait is clicked
 
 })

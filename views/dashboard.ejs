@@ -99,6 +99,7 @@
                     <input type="text" class="pet-new-image_url pet-input">
 
                     <button class="btnNewPet pet-button">Add it to your list</button>
+                    <button class="pet-button button-cancel">Cancel</button>
                 </form>
             </div>
 
@@ -124,6 +125,7 @@
                     <input type="text" class="pet-edit-image_url pet-input">
 
                     <button class="btnEditPet pet-button">Update details</button>
+                    <button class="pet-button button-cancel">Cancel</button>
                 </form>
             </div>
 
@@ -149,6 +151,7 @@
                     <input type="text" class="comments pet-input">
 
                     <button class="btnNewAppt pet-button">Add an appointment</button>
+                    <button class="pet-button button-cancel">Cancel</button>
                 </form>
             </div>
 
@@ -163,20 +166,23 @@
                     <input type="text" class="comments-meds pet-input">
 
                     <button class="btnNewMed pet-button">Add new medication</button>
+                    <button class="pet-button button-cancel">Cancel</button>
                 </form>
             </div>
-        
-            <h3 class="pet-selected">Pet Appointments</h3>
-            <div class="pet-appointments">  
-                <ul class="pet-appt-list">
-                </ul> 
+
+            <div class="layout_1_1">
+                <div class="pet-appointments">
+                    <!-- yield content -->
+                </div>
+
+                <div class="pet-meds">
+                    <h3 class="pet-selected pet-med-title">Pet Medications</h3> 
+                    <ul class="pet-med-list">
+                        <!-- yield content -->
+                    </ul>
+                </div>
             </div>
 
-            <h3 class="pet-selected pet-med-title">Pet Medications</h3> 
-            <div class="pet-meds">
-                <ul class="pet-med-list">
-                </ul>
-            </div>
         </div> <!-- Main panel-->
     </div> <!-- Overall container -->
 
