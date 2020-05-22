@@ -84,20 +84,20 @@ app.use('/', medsController)
 
 app.get("/", (req, res) => {
 
-    // if (!req.user) {
-    //     res.redirect('/login')
-    // }
-
-    let user = {
-        "id": 1,
-        "username": "ben",
-        "email": "ben@email.com",
-        "password_digest": "hahaha"
+    if (!req.user) {
+        res.redirect('/login')
     }
 
-    // let user = req.user
-    let userId = 1
-    // let userId = user.id
+    // let user = {
+    //     "id": 1,
+    //     "username": "ben",
+    //     "email": "ben@email.com",
+    //     "password_digest": "hahaha"
+    // }
+
+    let user = req.user
+    // let userId = 1
+    let userId = user.id
 
     db.query(
         'select * from pets where user_id = $1',
