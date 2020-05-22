@@ -3,6 +3,7 @@
 <h2>:dog:App: MyPet:rabbit:</h2>
 
 <img src="login.jpg" width="250" height="250">
+<img src="dashboard.jpg" width="250" height="250">
 
 Intro:
 Team project requirement is to build an interactive web application which included both client-side and server-side functionality that was been built with JavaScript and Node.js
