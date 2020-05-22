@@ -8,7 +8,6 @@ let apptPetIdI = document.querySelector('.petId')
 let apptUserIdI = document.querySelector('.apptUserId')
 let allShowNewApptBtn = document.querySelectorAll('.btnShowNewAppt')
 let newApptForm = document.querySelector('.newApptForm')
-
 let newMedForm = document.querySelector('.newMedForm')
 let btnNewMed = document.querySelector('.btnNewMed')
 let medPetIdI = document.querySelector('.petIdMed')
