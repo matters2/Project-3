@@ -11,7 +11,7 @@ btnNewUser.addEventListener('click', e => {
         password: document.querySelector('.password').value
     }
 
-    const url = 'http://localhost:8080/api/users/new'
+    const url = '/api/users/new'
     
     axios.post(url, params).then(res => {
         console.log('bug')
@@ -35,7 +35,7 @@ btnNewPet.addEventListener('click', e => {
         image_url: document.querySelector('.image_url').value
     }
 
-    const url = 'http://localhost:8080/api/pets/new'
+    const url = '/api/pets/new'
     
     axios.post(url, params).then(res => {
         console.log('bug')
@@ -56,7 +56,7 @@ btnNewAppt.addEventListener('click', e => {
         comments: document.querySelector('.comments').value
     }
 
-    const url = 'http://localhost:8080/api/appointments/new'
+    const url = '/api/appointments/new'
     
     axios.post(url, params).then(res => {
         console.log('bug')
@@ -74,7 +74,7 @@ btnNewMeds.addEventListener('click', e => {
         comments: document.querySelector('.commentsMeds').value
     }
 
-    const url = 'http://localhost:8080/api/meds/new'
+    const url = '/api/meds/new'
     
     axios.post(url, params).then(res => {
         console.log('bug')
