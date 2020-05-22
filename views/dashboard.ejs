@@ -67,7 +67,7 @@
 
                     <% pets.forEach( pet => { %>
                     <div class="sublayout-centered card">
-                        <img class="petImg card-portrait" src="https://i.pinimg.com/originals/37/a8/d8/37a8d8ddeb69604f4a042ddfa345a577.png<%=// pet.image_url %>" alt="<%= pet.name %>" data-id="<%= pet.id %>"> 
+                        <img class="petImg card-portrait" src="<%= pet.image_url %>" alt="<%= pet.name %>" data-id="<%= pet.id %>"> 
                         <h3 class="petNameLabel card-label"><%= pet.name %></h3>
                         <button class="btnShowEdit card-button" data-id="<%= pet.id %>">Details</button> 
                         <button class="btnShowNewAppt card-button" data-id="<%= pet.id %>">Appointments</button>
@@ -102,7 +102,7 @@
                     <input type="text" class="pet-new-image_url pet-input">
 
                     <button class="btnNewPet pet-button">Add it to your list</button>
-                    <button class="pet-button button-cancel">Cancel</button>
+                    <a class="pet-button button-cancel" href="/">Cancel</a>
                 </form>
             </div>
 
@@ -128,7 +128,7 @@
                     <input type="text" class="pet-edit-image_url pet-input">
 
                     <button class="btnEditPet pet-button">Update details</button>
-                    <button class="pet-button button-cancel">Cancel</button>
+                    <a class="pet-button button-cancel" href="/">Cancel</a>
                 </form>
             </div>
 
@@ -154,7 +154,7 @@
                     <input type="text" class="comments pet-input">
 
                     <button class="btnNewAppt pet-button">Add an appointment</button>
-                    <button class="pet-button button-cancel">Cancel</button>
+                    <a class="pet-button button-cancel" href="/">Cancel</a>
                 </form>
             </div>
 
@@ -169,22 +169,26 @@
                     <input type="text" class="comments-meds pet-input">
 
                     <button class="btnNewMed pet-button">Add new medication</button>
-                    <button class="pet-button button-cancel">Cancel</button>
+                    <a class="pet-button button-cancel" href="/">Cancel</a>
                 </form>
             </div>
 
-            <div class="layout_1_1">
-                <div class="pet-appointments">
-                    <!-- yield content -->
+            <div class="layout_1_1"> <!-- Appt & meds dropdown cards -->
+                <div class="sublayout-vertical">
+                    <div class="pet-appointments">
+                        <!-- yield content -->
+                    </div>
                 </div>
 
-                <div class="pet-meds">
-                    <h3 class="pet-selected pet-med-title">Pet Medications</h3> 
-                    <ul class="pet-med-list">
-                        <!-- yield content -->
-                    </ul>
+                <div class="sublayout-vertical">
+                    <div class="pet-meds">
+                        <h3 class="pet-selected pet-med-title">Pet Medications</h3> 
+                        <ul class="pet-med-list">
+                            <!-- yield content -->
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </div> <!-- Appt & meds dropdown cards -->
 
         </div> <!-- Main panel-->
     </div> <!-- Overall container -->
