@@ -33,7 +33,7 @@ allEditBtns.forEach( (button) => {
         // console.log(Number(e.target.dataset.id))
         let petId = (Number(e.target.dataset.id))
         console.log(petId)
-        let url = `http://localhost:8080/api/pets/${petId}`
+        let url = `/api/pets/${petId}`
         console.log(url)
         axios.get(url).then( resp => {
             console.log(resp.data)
@@ -64,7 +64,7 @@ btnEditPet.addEventListener('click', (e) => {
 
     console.log(params)
 
-    const url = 'http://localhost:8080/api/pets/edit'
+    const url = '/api/pets/edit'
     
     axios.patch(url, params).then(res => {
         console.log('bug')
@@ -89,7 +89,7 @@ btnPostNewPet.addEventListener('click', e => {
         image_url: document.querySelector('.pet-new-image_url').value
     }
 
-    const url = 'http://localhost:8080/api/pets/new'
+    const url = '/api/pets/new'
     
     axios.post(url, params).then(res => {
         console.log('bug')

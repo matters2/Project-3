@@ -29,7 +29,7 @@ allShowNewApptBtn.forEach( button => {
 
 btnNewAppt.addEventListener('click', e => {
   e.preventDefault()
-  let url = 'http://localhost:8080/api/appointments/new'
+  let url = '/api/appointments/new'
   
   let params = {
     petId: apptPetIdI.value,
@@ -64,7 +64,7 @@ btnShowNewMed.addEventListener('click', e => {
 btnNewMed.addEventListener('click', e => {
   e.preventDefault()
 
-  let url = 'http://localhost:8080/api/meds/new'
+  let url = '/api/meds/new'
   
   let params = {
     petId: medPetIdI.value,

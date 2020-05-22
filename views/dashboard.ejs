@@ -26,14 +26,13 @@
         <aside class="sublayout"> <!-- Left sidebar-->
             
 
-            <div class="all-appointments">
-                <h2>Appointments</h2>
+            <h2>Appointments</h2>
+            <div class="all-appointments sublayout-vertical">
                 <ul class="all-apptList">
 
                     <% appts.forEach(appt => {%>
                         <li>
                             <h3><%= appt.appt_date.toDateString() %></h3>
-                            <p class="appt-subtext">Pet number <%= appt.pet_id %></p>
                             <p class="appt-subtext"><%= appt.appt_type %></p>
                             <p class="appt-subtext"><%= appt.comments %></p>
                             <br>
@@ -42,20 +41,18 @@
                 </ul>
             </div>
 
-                <div class="all-medications">
-                    <h2>Medications</h2>
-                    <ul class="all-medsList">
+            <h2>Medications</h2>
+            <div class="all-medications sublayout-vertical">
+                <ul class="all-medsList">
 
-                        <% meds.forEach(med => {%>
-                        <li>
-                            <h3>Pet number <%= med.pet_id %></h3>
-                            <p class="appt-subtext"><%= med.comments %></p>
-                            <br>
-                        </li>
-                    <% }) %>
+                    <% meds.forEach(med => {%>
+                    <li>
+                        <p class="appt-subtext"><%= med.comments %></p>
+                    </li>
+                <% }) %>
 
-                    </ul>
-                </div>
+                </ul>
+            </div>
         </aside> <!-- Left sidebar-->
 
         <div class="sublayout"> <!-- Main panel-->

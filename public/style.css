@@ -81,7 +81,6 @@ body {
 }
 .sublayout-vertical {
     overflow-y: scroll;
-    white-space: nowrap;
     max-height: 400px;
 }
 ::-webkit-scrollbar {
